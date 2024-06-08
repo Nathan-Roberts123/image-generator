@@ -37,3 +37,15 @@ export const ZPrompt = z.object({
 });
 
 export type TPrompt = z.infer<typeof ZPrompt>;
+
+export type GeneratedImage = {
+  id: string;
+  imageUrl: string;
+  text: string;
+};
+
+export type Product = {
+  id: string;
+  points: number;
+  price: number;
+};

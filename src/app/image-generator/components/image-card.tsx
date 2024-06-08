@@ -1,24 +1,26 @@
 import { GiSaveArrow } from "react-icons/gi";
 import { Image } from "@chakra-ui/react";
 
-const ImageCard = () => {
+type ImageCardProps = {
+  imageUrl: string;
+  text: string;
+};
+const ImageCard = ({ imageUrl, text }: ImageCardProps) => {
   return (
-    <div className="col-span-4 grid grid-cols-4 border p-3 rounded-md h-fit gap-4">
-      <div className="col-span-4 md:col-span-2 relative h-fit">
+    <div className="flex flex-col justify-between lg:flex-row border p-3 rounded-md h-fit w-full">
+      <div className="relative h-fit">
         <Image
-          src="https://bit.ly/dan-abramov"
+          boxSize="200px"
+          src={imageUrl}
           alt="Generated Image"
-          className="rounded-md w-full"
+          className="rounded-md w-full object-cover"
         />
         <button className="transition-colors absolute bottom-4 left-4 bg-teal-700 text-white rounded-md p-2 hover:bg-teal-600">
           <GiSaveArrow />
         </button>
       </div>
-      <div className="col-span-4 md:col-span-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eum magni
-        nesciunt dolorum voluptas quos nostrum, similique dicta sit, vitae
-        consequatur in blanditiis iure quam, commodi aperiam eos. Nesciunt,
-        quibusdam!
+      <div className="lg:w-3/5 text-left">
+        <p className="text-wrap">{text}</p>
       </div>
     </div>
   );

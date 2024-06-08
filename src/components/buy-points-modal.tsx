@@ -3,12 +3,12 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
 } from "@chakra-ui/react";
 import BuyPointCard from "./buy-point-card";
+import { useContext } from "react";
+import { ProductContext } from "@/providers/products-provider";
 
 interface BuyPointsModalProps {
   isOpen: boolean;
@@ -16,22 +16,32 @@ interface BuyPointsModalProps {
 }
 
 const BuyPointsModal = ({ isOpen, onClose }: BuyPointsModalProps) => {
+  const products = useContext(ProductContext);
+
   return (
     <>
-      <Modal isOpen={isOpen} size="lg" onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody className="mb-3">
-            <div className="flex gap-4 justify-between">
-              <BuyPointCard points={10} price={20} />
-              <BuyPointCard points={50} price={60} />
-              <BuyPointCard points={100} price={120} />
-            </div>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      {products && (
+        <Modal isOpen={isOpen} size="lg" onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Modal Title</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody className="mb-3">
+              <div className="flex gap-4 justify-between">
+                {products.map((product) => {
+                  return (
+                    <BuyPointCard
+                      key={product.id}
+                      points={product.points}
+                      price={product.price}
+                    />
+                  );
+                })}
+              </div>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };

@@ -1,7 +1,6 @@
 "use client";
 import { Button, Link } from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
-import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { Heading } from "@chakra-ui/react";
 import { Flex } from "@chakra-ui/react";
@@ -19,8 +18,6 @@ function Navbar() {
   if (status === "loading") {
     return "Loading or not authenticated...";
   }
-
-  console.log({ session });
 
   return (
     <>
@@ -50,7 +47,7 @@ function Navbar() {
             Buy Points
           </Button>
           {status !== "authenticated" ? (
-            <Button colorScheme="teal" onClick={() => signIn()}>
+            <Button as={NextLink} colorScheme="teal" href="/auth/login">
               Signin
             </Button>
           ) : (

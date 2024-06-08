@@ -30,6 +30,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Order     Order[]
 }
 
 model Account {
@@ -91,8 +92,23 @@ model GenaratedImage {
   id        String   @id @default(cuid())
   userId    String
   text      String
-  imageUrl  String
+  imageName String
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id     String  @id @default(cuid())
+  points Int
+  price  Float
+  Order  Order[]
+}
+
+model Order {
+  id        String  @id @default(cuid())
+  user      User    @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+  userId    String
+  productId String
 }

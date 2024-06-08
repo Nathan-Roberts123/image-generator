@@ -5,12 +5,14 @@ import { httpBatchLink } from "@trpc/client";
 import { trpc } from "@/trpc";
 import { useState } from "react";
 import { getBaseUrl } from "@/utils";
+import { useSession } from "next-auth/react";
 
 export default function TrpcProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { data: session } = useSession();
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     trpc.createClient({
@@ -18,6 +20,11 @@ export default function TrpcProvider({
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
           // You can pass any HTTP headers you wish here
+          async headers() {
+            return {
+              userId: session?.user.id,
+            };
+          },
         }),
       ],
     })

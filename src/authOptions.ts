@@ -55,6 +55,21 @@ export const authOptions: NextAuthOptions = {
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+      session.user.id = token.userId;
+      return session;
+    },
+
+    async jwt({ token, user, account, profile, isNewUser }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (user) {
+        token.userId = user.id;
+      }
+      return token;
+    },
+  },
   adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/auth/login",
