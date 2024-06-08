@@ -18,6 +18,13 @@ export const ZSignupFormState = z
 
 export type TSignupFormState = z.infer<typeof ZSignupFormState>;
 
+export const ZSigninForm = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
+export type TSigninForm = z.infer<typeof ZSigninForm>;
+
 export const ZUser = z.object({
   email: z.string(),
   password: z.string(),

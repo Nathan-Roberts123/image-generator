@@ -9,8 +9,11 @@ import { Textarea } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZPrompt, TPrompt } from "@/types";
+import { trpc } from "@/trpc";
 
 const TextPrompt = () => {
+  const mutaion = trpc.imageGenerator.generateImage.useMutation();
+
   const {
     register,
     handleSubmit,
@@ -20,14 +23,19 @@ const TextPrompt = () => {
   });
 
   const onSubmit = (data: TPrompt) => {
-    console.log(data);
+    mutaion.mutate({ ...data });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={!!errors.text}>
         <FormLabel htmlFor="name">Enter Text Promt</FormLabel>
-        <Textarea id="name" placeholder="Enter prompt" {...register("text")} />
+        <Textarea
+          id="name"
+          placeholder="Enter prompt"
+          rows={5}
+          {...register("text")}
+        />
         <FormErrorMessage>
           {!!errors.text && errors.text.message}
         </FormErrorMessage>

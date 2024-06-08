@@ -6,7 +6,7 @@ const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
 });
 
-async function generateImage(promt: TPrompt) {
+export async function generateImage(promt: TPrompt) {
   const response = await openai.images.generate({
     model: "dall-e-3",
     prompt: promt.text,

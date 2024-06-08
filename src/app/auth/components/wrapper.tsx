@@ -8,10 +8,9 @@ import {
   Divider,
   AbsoluteCenter,
   Box,
-  Button,
 } from "@chakra-ui/react";
-import { FaGoogle } from "react-icons/fa";
 import NextLink from "next/link";
+import GoogleButton from "./google-button";
 
 const Wrapper = ({
   children,
@@ -23,14 +22,7 @@ const Wrapper = ({
   return (
     <div className="flex flex-col justify-center h-full items-center">
       <Card className="w-full md:w-1/2 lg:w-1/3">
-        <Button
-          leftIcon={<FaGoogle />}
-          colorScheme="teal"
-          variant="solid"
-          className="mt-4 mx-6"
-        >
-          Continue with google
-        </Button>
+        <GoogleButton />
         <Box position="relative" className="px-6 pt-6">
           <Divider />
           <AbsoluteCenter bg="white" px="4">
