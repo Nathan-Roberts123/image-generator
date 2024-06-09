@@ -10,6 +10,7 @@ import { ButtonGroup } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useDisclosure } from "@chakra-ui/react";
 import BuyPointsModal from "./buy-points-modal";
+import { FaHome } from "react-icons/fa";
 
 function Navbar() {
   const { status, data: session } = useSession();
@@ -29,7 +30,10 @@ function Navbar() {
       >
         <Box className="flex items-center text-center">
           <Heading size="sm" className="text-white text-center">
-            <Link href="/">AI Image App</Link>
+            <Link href="/">
+              <span className="hidden md:block">AI Image App</span>
+              <FaHome className="md:hidden text-2xl mr-2" />
+            </Link>
           </Heading>
 
           <div className="flex items-center ml-2 md:ml-14 text-white gap-4">
