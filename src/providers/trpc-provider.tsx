@@ -3,7 +3,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { trpc } from "@/trpc";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getBaseUrl } from "@/utils";
 import { useSession } from "next-auth/react";
 
@@ -14,21 +14,29 @@ export default function TrpcProvider({
 }) {
   const { data: session } = useSession();
   const [queryClient] = useState(() => new QueryClient());
-  const [trpcClient] = useState(() =>
+  const [trpcClient, setTrpcClient] = useState(() =>
     trpc.createClient({
-      links: [
-        httpBatchLink({
-          url: `${getBaseUrl()}/api/trpc`,
-          // You can pass any HTTP headers you wish here
-          async headers() {
-            return {
-              userId: session?.user.id,
-            };
-          },
-        }),
-      ],
+      links: [],
     })
   );
+
+  useEffect(() => {
+    setTrpcClient(() =>
+      trpc.createClient({
+        links: [
+          httpBatchLink({
+            url: `${getBaseUrl()}/api/trpc`,
+            // You can pass any HTTP headers you wish here
+            async headers() {
+              return {
+                userId: session?.user.id,
+              };
+            },
+          }),
+        ],
+      })
+    );
+  }, [session]);
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
