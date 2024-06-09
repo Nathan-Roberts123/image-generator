@@ -99,10 +99,11 @@ model GenaratedImage {
 }
 
 model Product {
-  id     String  @id @default(cuid())
-  points Int
-  price  Float
-  Order  Order[]
+  id              String  @id @default(cuid())
+  points          Int
+  price           Float
+  stripe_price_id String  @unique
+  Order           Order[]
 }
 
 model Order {

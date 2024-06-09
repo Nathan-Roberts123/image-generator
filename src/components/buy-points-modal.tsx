@@ -32,8 +32,10 @@ const BuyPointsModal = ({ isOpen, onClose }: BuyPointsModalProps) => {
                   return (
                     <BuyPointCard
                       key={product.id}
+                      id={product.id}
                       points={product.points}
                       price={product.price}
+                      stripe_price_id={product.stripe_price_id}
                     />
                   );
                 })}

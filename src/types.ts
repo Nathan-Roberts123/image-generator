@@ -48,4 +48,12 @@ export type Product = {
   id: string;
   points: number;
   price: number;
+  stripe_price_id: string;
 };
+
+export const ZOrder = z.object({
+  userId: z.string(),
+  productId: z.string(),
+});
+
+export type TOrder = z.infer<typeof ZOrder>;

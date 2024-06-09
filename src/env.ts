@@ -11,6 +11,8 @@ export const env = createEnv({
     BUCKET_NAME: z.string(),
     AWS_ACCESS_KEY_ID: z.string(),
     AWS_SECRET_KEY_ID: z.string(),
+    STRIPE_SECRET_KEY: z.string(),
+    STRIPE_WEBHOOK_SECRET: z.string(),
   },
   client: {},
   // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
@@ -23,6 +25,8 @@ export const env = createEnv({
     BUCKET_NAME: process.env.BUCKET_NAME,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_KEY_ID: process.env.AWS_SECRET_KEY_ID,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   },
   // For Next.js >= 13.4.4, you only need to destructure client variables:
   // experimental__runtimeEnv: {
