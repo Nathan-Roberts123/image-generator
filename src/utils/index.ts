@@ -26,3 +26,19 @@ export async function isSame(plainText: string, encrytedString: string) {
   const value = await bcrypt.compare(plainText, encrytedString);
   return value;
 }
+
+export async function downloadImage(imageUrl: string, id: string) {
+  const response = await fetch(
+    `/api/download-image?url=${encodeURIComponent(imageUrl)}`
+  );
+  const blob = await response.blob();
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `aiphoto-image-${id}.png`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  setTimeout(() => URL.revokeObjectURL(link.href), 100);
+}

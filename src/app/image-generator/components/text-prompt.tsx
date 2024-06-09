@@ -40,7 +40,6 @@ const TextPrompt = () => {
     <>
       {isPending && (
         <>
-          <div className="fixed h-screen w-screen bg-black opacity-20"></div>
           <div className="flex items-center gap-2 justify-center">
             <span>Please Wait While Generating image</span> <Spinner />
           </div>

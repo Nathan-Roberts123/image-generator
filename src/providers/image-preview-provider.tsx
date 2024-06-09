@@ -10,7 +10,6 @@ export const ImageDispatchContext = createContext(
 type ActionType = { image: GeneratedImage | null };
 
 const imageReducer = (image: GeneratedImage | null, action: ActionType) => {
-  console.log("nice image: ", image);
   return action.image;
 };
 

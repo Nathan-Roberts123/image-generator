@@ -10,8 +10,6 @@ const ImagesList = async () => {
 
   const images = await caller.imageGenerator.getImages();
 
-  console.log({ images });
-
   return (
     <div className="flex flex-col gap-8 w-full">
       {images.map((image) => {
