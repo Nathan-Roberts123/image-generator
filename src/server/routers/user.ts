@@ -4,6 +4,7 @@ import prisma from "@/db";
 import { hashString } from "@/utils";
 import { Prisma } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
+import { getTotalPoints } from "@/utils/points";
 
 export const userRouter = router({
   create: procedure.input(ZUser).mutation(async ({ input }) => {
@@ -33,5 +34,12 @@ export const userRouter = router({
       }
       throw e;
     }
+  }),
+  getPoints: procedure.query(async ({ ctx }) => {
+    if (!ctx.userId) {
+      throw new Error("Failed To Get A userId");
+    }
+
+    return await getTotalPoints({ userId: ctx.userId });
   }),
 });

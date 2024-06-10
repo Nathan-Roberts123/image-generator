@@ -1,24 +1,26 @@
 "use client";
 import { GiSaveArrow } from "react-icons/gi";
-import { Image } from "@chakra-ui/react";
+import Image from "next/image";
 import { downloadImage } from "@/utils";
 import { useToast } from "@chakra-ui/react";
+import { GeneratedImage } from "@/types";
 
 type ImageCardProps = {
-  id: string;
-  imageUrl: string;
-  text: string;
+  image: GeneratedImage;
 };
-const ImageCard = ({ id, imageUrl, text }: ImageCardProps) => {
+const ImageCard = ({ image }: ImageCardProps) => {
+  const { id, imageUrl, text } = image;
+
   const toast = useToast();
   return (
-    <div className="flex flex-col justify-between lg:flex-row border p-3 rounded-md h-fit w-full">
+    <div className="flex flex-col justify-between items-center lg:items-start lg:flex-row lg:gap-3 border p-3 rounded-md h-fit w-full">
       <div className="relative h-fit">
         <Image
-          boxSize="200px"
+          width={190}
+          height={190}
           src={imageUrl}
           alt="Generated Image"
-          className="rounded-md w-full object-cover"
+          className="rounded-md object-cover"
         />
         <button
           onClick={async () => {
@@ -50,7 +52,7 @@ const ImageCard = ({ id, imageUrl, text }: ImageCardProps) => {
           <GiSaveArrow />
         </button>
       </div>
-      <div className="lg:w-3/5 text-left">
+      <div className="lg:w-2/3 text-left">
         <p className="text-wrap">{text}</p>
       </div>
     </div>

@@ -4,7 +4,7 @@ import React, { createContext, useReducer } from "react";
 
 export const ImageContext = createContext<GeneratedImage | null>(null);
 export const ImageDispatchContext = createContext(
-  ({ image }: { image: GeneratedImage }) => {}
+  ({ image }: { image: GeneratedImage | null }) => {}
 );
 
 type ActionType = { image: GeneratedImage | null };

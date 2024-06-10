@@ -8,7 +8,7 @@ jiti("./src/env");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ["images.unsplash.com", "aiphotos-dev.s3.us-east-1.amazonaws.com"],
   },
 };
 

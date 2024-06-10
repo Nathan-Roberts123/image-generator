@@ -10,6 +10,7 @@ import {
 import { env } from "@/env";
 import { v4 as uuidv4 } from "uuid";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getTotalPoints } from "@/utils/points";
 
 const s3Client = new S3Client({
   credentials: {
@@ -21,11 +22,17 @@ const s3Client = new S3Client({
 
 export const imageGeneratorRouter = router({
   generateImage: procedure.input(ZPrompt).mutation(async ({ input, ctx }) => {
-    const imageB64 = await generateImage({ text: input.text });
-
     if (!ctx.userId) {
       throw new Error("Failed To Get A userId");
     }
+
+    const totalPoints = await getTotalPoints({ userId: ctx.userId });
+
+    if (totalPoints === 0 || !totalPoints) {
+      throw new Error("User don't have enough points");
+    }
+
+    const imageB64 = await generateImage({ text: input.text });
 
     if (!imageB64) {
       throw new Error("Failed To Generate Image");

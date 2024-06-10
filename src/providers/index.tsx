@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import ImagePreviewProvider from "./image-preview-provider";
 import ProductsProvider from "./products-provider";
 import { Product } from "@/types";
+import PointsProvider from "./points-provider";
 
 function Providers({
   children,
@@ -20,9 +21,11 @@ function Providers({
     <SessionProvider session={session}>
       <ChakraProvider>
         <TrpcProvider>
-          <ProductsProvider products={products}>
-            <ImagePreviewProvider>{children}</ImagePreviewProvider>
-          </ProductsProvider>
+          <PointsProvider>
+            <ProductsProvider products={products}>
+              <ImagePreviewProvider>{children}</ImagePreviewProvider>
+            </ProductsProvider>
+          </PointsProvider>
         </TrpcProvider>
       </ChakraProvider>
     </SessionProvider>

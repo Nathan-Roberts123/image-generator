@@ -5,7 +5,7 @@ import { Product } from "@/types";
 import { trpc } from "@/trpc";
 import { useRouter } from "next/navigation";
 
-const BuyPointCard = ({ points, price, stripe_price_id }: Product) => {
+const BuyPointCard = ({ points, price, stripe_price_id, id }: Product) => {
   const router = useRouter();
   const { mutate } = trpc.stripe.createCheckoutSession.useMutation({
     onSuccess: (data) => {
@@ -19,7 +19,7 @@ const BuyPointCard = ({ points, price, stripe_price_id }: Product) => {
       <div className="text-xl font-bold mt-4">${price}</div>
       <Button
         onClick={() => {
-          mutate({ price_id: stripe_price_id });
+          mutate({ price_id: stripe_price_id, product_id: id });
         }}
         colorScheme="teal"
         className="w-full mt-3"

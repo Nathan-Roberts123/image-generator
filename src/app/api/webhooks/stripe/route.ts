@@ -38,11 +38,24 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   switch (event.type) {
     case "checkout.session.completed":
       const session_complete = event.data.object;
-      console.log({ session_complete });
+      if (session_complete.payment_status === "paid") {
+        if (!session_complete.metadata) {
+          return new NextResponse(`Could Not Create Order Metadata Was Null`, {
+            status: 400,
+          });
+        }
+        const productId = session_complete.metadata["productId"];
+        const userId = session_complete.metadata["userId"];
+        await createOrder({ userId, productId });
+      }
+
       break;
     case "checkout.session.async_payment_failed":
       const session_failed = event.data.object;
-      console.log({ session_failed });
+      console.error(`⚠️  Session Failed.`);
+      return new NextResponse(`sessin failed`, {
+        status: 400,
+      });
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);

@@ -13,13 +13,22 @@ import { trpc } from "@/trpc";
 import { useContext } from "react";
 import { ImageDispatchContext } from "@/providers/image-preview-provider";
 import { Spinner } from "@chakra-ui/react";
+import {
+  PointsContext,
+  PointsDispatchContext,
+} from "@/providers/points-provider";
+import { useToast } from "@chakra-ui/react";
 
 const TextPrompt = () => {
+  const toast = useToast();
   const dispatch = useContext(ImageDispatchContext);
+  const pointsDispatch = useContext(PointsDispatchContext);
+  const points = useContext(PointsContext);
   const { mutate, isPending } = trpc.imageGenerator.generateImage.useMutation({
     onSuccess: (data) => {
       reset();
       dispatch({ image: data });
+      pointsDispatch({ type: "decrement", count: 1 });
     },
   });
 
@@ -33,13 +42,27 @@ const TextPrompt = () => {
   });
 
   const onSubmit = (data: TPrompt) => {
-    mutate({ ...data });
+    if (points === 0) {
+      toast({
+        title: "Error.",
+        description: "You don't have enough points.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+    if (points !== 0) {
+      dispatch({ image: null });
+      mutate({ ...data });
+    }
   };
 
   return (
     <>
       {isPending && (
         <>
+          <div className="fixed top-0 bottom-0 right-0 left-0 z-10"></div>
           <div className="flex items-center gap-2 justify-center">
             <span>Please Wait While Generating image</span> <Spinner />
           </div>

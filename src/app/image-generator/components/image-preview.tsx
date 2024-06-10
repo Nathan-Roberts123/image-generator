@@ -1,10 +1,11 @@
 "use client";
-import { Button, Image } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { HiOutlineSave } from "react-icons/hi";
 import { ImageContext } from "@/providers/image-preview-provider";
 import { useContext } from "react";
 import { downloadImage } from "@/utils";
 import { useToast } from "@chakra-ui/react";
+import Image from "next/image";
 
 const ImagePreview = () => {
   const image = useContext(ImageContext);
@@ -15,7 +16,12 @@ const ImagePreview = () => {
       {image && (
         <>
           <div className="flex flex-col gap-3">
-            <Image src={image.imageUrl} alt="Generated Image" />
+            <Image
+              width={1024}
+              height={1024}
+              src={image.imageUrl}
+              alt="Generated Image"
+            />
             <div>{image.text}</div>
           </div>
           <div className="mt-4">

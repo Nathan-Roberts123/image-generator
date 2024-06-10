@@ -11,10 +11,16 @@ import NextLink from "next/link";
 import { useDisclosure } from "@chakra-ui/react";
 import BuyPointsModal from "./buy-points-modal";
 import { FaHome } from "react-icons/fa";
+import { useContext } from "react";
+import { PointsContext } from "@/providers/points-provider";
 
 function Navbar() {
   const { status, data: session } = useSession();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const points = useContext(PointsContext);
+
+  console.log({ points });
 
   if (status === "loading") {
     return "Loading or not authenticated...";
@@ -44,7 +50,7 @@ function Navbar() {
         </Box>
         <Spacer />
         <div className="mr-4 bg-teal-600 p-2 rounded-lg text-white font-bold">
-          10
+          {points}
         </div>
         <ButtonGroup gap="2">
           <Button colorScheme="teal" onClick={onOpen}>

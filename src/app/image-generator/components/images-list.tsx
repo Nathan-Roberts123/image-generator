@@ -1,19 +1,27 @@
-import React from "react";
+"use client";
+import { GeneratedImage } from "@/types";
 import ImageCard from "./image-card";
-import { createCaller } from "@/server/serverClient";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/authOptions";
+import { trpc } from "@/trpc";
+import { useContext, useEffect } from "react";
+import { ImageContext } from "@/providers/image-preview-provider";
 
-const ImagesList = async () => {
-  const session = await getServerSession(authOptions);
-  const caller = createCaller({ userId: session?.user.id! });
+const ImagesList = ({ initialImages }: { initialImages: GeneratedImage[] }) => {
+  const { data: images, refetch } = trpc.imageGenerator.getImages.useQuery(
+    undefined,
+    {
+      initialData: initialImages,
+    }
+  );
+  const image = useContext(ImageContext);
 
-  const images = await caller.imageGenerator.getImages();
+  useEffect(() => {
+    refetch();
+  }, [image, refetch]);
 
   return (
     <div className="flex flex-col gap-8 w-full">
       {images.map((image) => {
-        return <ImageCard key={image.id} {...image} />;
+        return <ImageCard key={image.id} image={image} />;
       })}
     </div>
   );
