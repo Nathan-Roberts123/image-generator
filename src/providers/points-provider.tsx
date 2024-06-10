@@ -37,7 +37,7 @@ const PointsProvider = ({ children }: { children: React.ReactNode }) => {
   const [points, dispatch] = useReducer(pointsReducer, null);
 
   useEffect(() => {
-    dispatch({ type: "set", count: data ? data : null });
+    dispatch({ type: "set", count: data === undefined ? null : data });
     refetch();
   }, [data, refetch, points]);
 
