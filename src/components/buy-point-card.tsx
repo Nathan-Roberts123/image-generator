@@ -4,8 +4,17 @@ import { Button } from "@chakra-ui/react";
 import { Product } from "@/types";
 import { trpc } from "@/trpc";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-const BuyPointCard = ({ points, price, stripe_price_id, id }: Product) => {
+type BuyPointCardProps = {
+  product: Product;
+  onClose: () => void;
+};
+
+const BuyPointCard = ({ product, onClose }: BuyPointCardProps) => {
+  const { points, price, stripe_price_id, id } = product;
+  const { data: session } = useSession();
+
   const router = useRouter();
   const { mutate } = trpc.stripe.createCheckoutSession.useMutation({
     onSuccess: (data) => {
@@ -19,7 +28,12 @@ const BuyPointCard = ({ points, price, stripe_price_id, id }: Product) => {
       <div className="text-xl font-bold mt-4">${price}</div>
       <Button
         onClick={() => {
-          mutate({ price_id: stripe_price_id, product_id: id });
+          if (session) {
+            mutate({ price_id: stripe_price_id, product_id: id });
+          } else {
+            onClose();
+            router.push("/auth/login");
+          }
         }}
         colorScheme="teal"
         className="w-full mt-3"

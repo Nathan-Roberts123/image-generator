@@ -37,7 +37,7 @@ export const userRouter = router({
   }),
   getPoints: procedure.query(async ({ ctx }) => {
     if (!ctx.userId) {
-      throw new Error("Failed To Get A userId");
+      return null;
     }
 
     return await getTotalPoints({ userId: ctx.userId });

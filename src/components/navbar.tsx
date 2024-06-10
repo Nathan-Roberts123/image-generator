@@ -20,8 +20,6 @@ function Navbar() {
 
   const points = useContext(PointsContext);
 
-  console.log({ points });
-
   if (status === "loading") {
     return "Loading or not authenticated...";
   }
