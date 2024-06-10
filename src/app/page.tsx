@@ -1,8 +1,8 @@
 import { Heading } from "@chakra-ui/react";
-import HomeImage from "./components/home-image";
 import { Button } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
+import HomeImagesIist from "./components/home-images-list";
 
 export default async function Home() {
   return (
@@ -19,17 +19,7 @@ export default async function Home() {
         stunning visuals.
       </Text>
       <div className="flex justify-center">
-        <div className="mt-20 p-6 grid grid-cols-3 gap-10">
-          <HomeImage
-            url="/images-examples/ai-pig.png"
-            text="Pigs playing in a farm"
-          />
-          <HomeImage
-            url="/images-examples/moses.png"
-            text="Moses spliting the red sea"
-          />
-          <HomeImage url="/images-examples/tigers.png" text="Tigers" />
-        </div>
+        <HomeImagesIist />
       </div>
       <Button
         as={Link}
