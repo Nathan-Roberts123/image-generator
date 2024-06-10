@@ -5,6 +5,10 @@ export const getTotalPoints = async ({ userId }: { userId: string }) => {
     where: { userId },
   });
 
+  if (!orders.length) {
+    return 0;
+  }
+
   let totalPoints = 0;
 
   for (const order of orders) {
