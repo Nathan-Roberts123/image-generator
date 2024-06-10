@@ -9,10 +9,12 @@ import { Spacer } from "@chakra-ui/react";
 import { ButtonGroup } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useDisclosure } from "@chakra-ui/react";
-import BuyPointsModal from "./buy-points-modal";
 import { FaHome } from "react-icons/fa";
 import { useContext } from "react";
 import { PointsContext } from "@/providers/points-provider";
+import dynamic from "next/dynamic";
+
+const BuyPointsModal = dynamic(() => import("./buy-points-modal"));
 
 function Navbar() {
   const { status, data: session } = useSession();
@@ -26,7 +28,7 @@ function Navbar() {
 
   return (
     <>
-      <BuyPointsModal isOpen={isOpen} onClose={onClose} />
+      {isOpen && <BuyPointsModal isOpen={isOpen} onClose={onClose} />}
       <Flex
         minWidth="max-content"
         alignItems="center"
