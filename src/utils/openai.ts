@@ -1,6 +1,10 @@
-import { env } from "@/env";
+// import { env } from "@/env";
+import { getServerEnv } from "@/env";
+
 import { TPrompt } from "@/types";
 import OpenAI from "openai";
+
+const env = getServerEnv();
 
 const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,

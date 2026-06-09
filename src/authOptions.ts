@@ -3,8 +3,11 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "@/db";
-import { env } from "@/env";
+// import { env } from "@/env";
+import { getServerEnv } from "@/env";
 import { isSame } from "@/utils";
+
+const env = getServerEnv();
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -35,7 +38,7 @@ export const authOptions: NextAuthOptions = {
 
         const isAuthecticated = await isSame(
           credentials?.password!,
-          user?.password!
+          user?.password!,
         );
 
         if (user && isAuthecticated) {

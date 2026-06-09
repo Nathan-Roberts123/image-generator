@@ -7,6 +7,7 @@ jiti("./src/env");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   images: {
     domains: ["images.unsplash.com", "aiphotos-dev.s3.us-east-1.amazonaws.com"],
   },

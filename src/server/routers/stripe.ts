@@ -1,8 +1,12 @@
 import stripe from "stripe";
 import { procedure, router } from "../trpc";
-import { env } from "@/env";
+// import { env } from "@/env";
+import { getServerEnv } from "@/env";
+
 import { z } from "zod";
 import { getBaseUrl } from "@/utils";
+
+const env = getServerEnv();
 
 const Stripe = new stripe(env.STRIPE_SECRET_KEY);
 
@@ -12,7 +16,7 @@ export const stripeRouter = router({
       z.object({
         price_id: z.string(),
         product_id: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const session = await Stripe.checkout.sessions.create({
