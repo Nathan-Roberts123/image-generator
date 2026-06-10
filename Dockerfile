@@ -1,5 +1,5 @@
 # Stage 1: Install dependencies
-FROM node:current-alpine3.23 AS deps
+FROM node:22-alpine3.19 AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
@@ -8,7 +8,7 @@ COPY package.json package-lock.json* ./
 RUN npm ci
 
 # Stage 2: Build the application
-FROM node:current-alpine3.23 AS builder
+FROM node:22-alpine3.19 AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -18,10 +18,11 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+RUN npx prisma generate
 RUN npm run build
 
 # Stage 3: Production runner
-FROM node:current-alpine3.23 AS runner
+FROM node:22-alpine3.19 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
