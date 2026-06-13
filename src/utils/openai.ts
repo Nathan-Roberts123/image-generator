@@ -1,16 +1,12 @@
-// import { env } from "@/env";
-import { getServerEnv } from "@/env";
-
+import { env } from "@/env";
 import { TPrompt } from "@/types";
 import OpenAI from "openai";
 
-const env = getServerEnv();
-
-const openai = new OpenAI({
-  apiKey: env.OPENAI_API_KEY,
-});
-
 export async function generateImage(promt: TPrompt) {
+  const openai = new OpenAI({
+    apiKey: env.OPENAI_API_KEY,
+  });
+
   const response = await openai.images.generate({
     model: "dall-e-3",
     prompt: promt.text,

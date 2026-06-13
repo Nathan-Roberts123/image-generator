@@ -13,6 +13,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ENV SKIP_ENV_VALIDATION=true
+
 RUN npx prisma generate
 RUN npm run build
 

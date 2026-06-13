@@ -1,12 +1,8 @@
 import stripe from "stripe";
 import { procedure, router } from "../trpc";
-// import { env } from "@/env";
-import { getServerEnv } from "@/env";
-
+import { env } from "@/env";
 import { z } from "zod";
 import { getBaseUrl } from "@/utils";
-
-const env = getServerEnv();
 
 const Stripe = new stripe(env.STRIPE_SECRET_KEY);
 

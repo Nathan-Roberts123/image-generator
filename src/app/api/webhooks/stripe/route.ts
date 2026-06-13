@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-// import { env } from "@/env";
-import { getServerEnv } from "@/env";
+import { env } from "@/env";
 import prisma from "@/db";
-
-const env = getServerEnv();
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY);
 const webhookSecret = env.STRIPE_WEBHOOK_SECRET;

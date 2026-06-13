@@ -7,14 +7,10 @@ import {
   PutObjectCommand,
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
-// import { env } from "@/env";
-
-import { getServerEnv } from "@/env";
+import { env } from "@/env";
 import { v4 as uuidv4 } from "uuid";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { getTotalPoints } from "@/utils/points";
-
-const env = getServerEnv();
 
 const s3Client = new S3Client({
   credentials: {
