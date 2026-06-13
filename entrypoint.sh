@@ -3,5 +3,8 @@
 echo "Running Prisma migrations..."
 npx prisma@5.14.0 migrate deploy
 
+echo "Seeding products"
+npm run seed
+
 echo "Starting server..."
 node server.js

@@ -15,7 +15,7 @@ COPY . .
 
 ENV SKIP_ENV_VALIDATION=true
 
-RUN npx prisma generate
+RUN npm run postinstall
 RUN npm run build
 
 # Stage 3: Production runner
