@@ -1,6 +1,8 @@
 import prisma from "@/db";
 
 export const getTotalPoints = async ({ userId }: { userId: string }) => {
+  return 2;
+
   const orders = await prisma.order.findMany({
     where: { userId },
   });
@@ -9,7 +11,7 @@ export const getTotalPoints = async ({ userId }: { userId: string }) => {
     return 0;
   }
 
-  let totalPoints = 2;
+  let totalPoints = 0;
 
   for (const order of orders) {
     const product = await prisma.product.findUnique({
