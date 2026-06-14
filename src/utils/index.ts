@@ -9,9 +9,9 @@ export function getBaseUrl() {
     // reference for vercel.com
     return `https://${process.env.VERCEL_URL}`;
 
-  if (process.env.RENDER_INTERNAL_HOSTNAME)
+  if (process.env.NODE_ENV == "production")
     // reference for render.com
-    return `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}`;
+    return `http://image.nathank.store:80`;
 
   // assume localhost
   return `http://localhost:${process.env.PORT ?? 3000}`;
@@ -29,7 +29,7 @@ export async function isSame(plainText: string, encrytedString: string) {
 
 export async function downloadImage(imageUrl: string, id: string) {
   const response = await fetch(
-    `/api/download-image?url=${encodeURIComponent(imageUrl)}`
+    `/api/download-image?url=${encodeURIComponent(imageUrl)}`,
   );
   const blob = await response.blob();
 
