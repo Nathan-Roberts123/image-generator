@@ -5,6 +5,7 @@ import { createCaller } from "@/server/serverClient";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/authOptions";
 
+// quick fix for login not redirecting problem
 export const dynamic = "force-dynamic";
 
 async function Page() {
