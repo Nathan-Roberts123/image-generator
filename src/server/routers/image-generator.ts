@@ -28,9 +28,9 @@ export const imageGeneratorRouter = router({
 
     const totalPoints = await getTotalPoints({ userId: ctx.userId });
 
-    // if (totalPoints === 0 || !totalPoints) {
-    //   throw new Error("User don't have enough points");
-    // }
+    if (totalPoints === 0 || !totalPoints) {
+      throw new Error("User don't have enough points");
+    }
 
     const imageB64 = await generateImage({ text: input.text });
 
