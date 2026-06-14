@@ -8,11 +8,11 @@ export async function generateImage(promt: TPrompt) {
   });
 
   const response = await openai.images.generate({
-    model: "gpt-image-2",
+    model: "gpt-image-1-mini",
     prompt: promt.text,
     n: 1,
     size: "1024x1024",
-    response_format: "b64_json",
+    quality: "low"
   });
 
   const image_base64 = response.data[0].b64_json;

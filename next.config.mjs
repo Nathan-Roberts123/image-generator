@@ -13,7 +13,14 @@ const nextConfig = {
   },
   output: "standalone",
   images: {
-    domains: ["images.unsplash.com", "aiphotos-dev.s3.us-east-1.amazonaws.com"],
+    domains: ["images.unsplash.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'image-generator-526tw.s3.us-east-1.amazonaws.com', // Replace with your image provider's domain
+        pathname: '/**',          // Allows all paths under this domain
+      },
+    ],
   },
 };
 
