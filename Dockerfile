@@ -16,6 +16,9 @@ COPY . .
 ENV SKIP_ENV_VALIDATION=true
 
 RUN npm run postinstall
+
+RUN npx tsc prisma/seed.ts --outDir dist
+
 RUN npm run build
 
 # Stage 3: Production runner
@@ -29,6 +32,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/dist ./dist
 
 # Copy necessary files for standalone output
 COPY --from=builder /app/public ./public
@@ -37,8 +41,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 COPY --from=builder /app/entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
-
-RUN npm install -D ts-node typescript
 
 USER nextjs
 
