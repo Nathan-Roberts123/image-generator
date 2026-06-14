@@ -12,6 +12,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   output: "standalone",
+  // Forces Next.js to trace and include sharp binaries in the standalone folder
+  outputFileTracingIncludes: {
+    '/**': ['./node_modules/sharp/**/*', './node_modules/@img/**/*'],
+  },
   images: {
     remotePatterns: [
       {

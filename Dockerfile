@@ -42,6 +42,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 
+# CRITICAL: Inform Next.js where to locate the sharp binary in production
+ENV NEXT_SHARP_PATH=/app/node_modules/sharp
+
 USER nextjs
 
 EXPOSE 3000
