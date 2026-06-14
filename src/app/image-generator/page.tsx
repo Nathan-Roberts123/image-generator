@@ -5,6 +5,8 @@ import { createCaller } from "@/server/serverClient";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/authOptions";
 
+export const dynamic = "force-dynamic";
+
 async function Page() {
   const session = await getServerSession(authOptions);
   const caller = createCaller({ userId: session?.user.id! });
