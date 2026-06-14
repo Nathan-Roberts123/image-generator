@@ -16,7 +16,8 @@ function LoignPage() {
     const res = await signIn("credentials", { redirect: false, ...data });
 
     if (res?.ok) {
-      router.push("/");
+      router.refresh();
+      router.push("/image-generator");
       return;
     }
 
