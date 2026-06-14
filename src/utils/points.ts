@@ -9,7 +9,7 @@ export const getTotalPoints = async ({ userId }: { userId: string }) => {
     return 0;
   }
 
-  let totalPoints = 0;
+  let totalPoints = 2;
 
   for (const order of orders) {
     const product = await prisma.product.findUnique({
