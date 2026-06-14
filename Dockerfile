@@ -38,6 +38,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/entrypoint.sh ./entrypoint.sh
 RUN chmod +x ./entrypoint.sh
 
+RUN npm install -D ts-node typescript
+
 USER nextjs
 
 EXPOSE 3000
