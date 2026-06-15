@@ -13,11 +13,11 @@ function LoignPage() {
   const toast = useToast();
 
   const onSubmit = async (data: TSigninForm) => {
+    setLogin(true);
     const res = await signIn("credentials", { redirect: false, ...data });
 
     if (res?.ok) {
       window.location.href = "/";
-      setLogin(false);
       return;
     }
 
@@ -28,6 +28,7 @@ function LoignPage() {
       duration: 9000,
       isClosable: true,
     });
+    setLogin(false);
   };
 
   return (
