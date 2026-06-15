@@ -43,7 +43,7 @@ function Navbar() {
           </Heading>
 
           <div className="flex items-center ml-2 md:ml-14 text-white gap-4">
-            <Link className="text-white" as={NextLink} href="/image-generator">
+            <Link className="text-white" href="/image-generator">
               Generate Image
             </Link>
           </div>
