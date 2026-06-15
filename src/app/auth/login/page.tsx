@@ -5,12 +5,20 @@ import { useForm } from "react-hook-form";
 import { TSigninForm } from "@/types";
 import { signIn } from "next-auth/react";
 import { useToast } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 function LoignPage() {
   const { register, handleSubmit } = useForm<TSigninForm>();
   const toast = useToast();
-  const router = useRouter();
+
+  const { data: session, status, update } = useSession();
+
+  useEffect(() => {
+    if (status === "loading" || !session) {
+      update();
+    }
+  }, [session, status, update]);
 
   const onSubmit = async (data: TSigninForm) => {
     const res = await signIn("credentials", { redirect: false, ...data });
