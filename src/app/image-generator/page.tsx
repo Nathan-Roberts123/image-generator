@@ -6,9 +6,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/authOptions";
 import { redirect } from "next/navigation";
 
-// quick fix for login not redirecting problem
-export const dynamic = "force-dynamic";
-
 async function Page() {
   const session = await getServerSession(authOptions);
 
