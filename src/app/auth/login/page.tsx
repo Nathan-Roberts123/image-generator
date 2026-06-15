@@ -17,7 +17,7 @@ function LoignPage() {
     const res = await signIn("credentials", { redirect: false, ...data });
 
     if (res?.ok) {
-      window.location.href = "/";
+      window.location.href = "/image-generator";
       return;
     }
 
