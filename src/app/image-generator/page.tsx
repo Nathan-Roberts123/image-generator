@@ -13,7 +13,7 @@ async function Page() {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user?.id) {
-    redirect("/api/auth/signin"); // Or redirect to "/"
+    redirect("/api/auth/signin");
   }
 
   const caller = createCaller({ userId: session?.user.id! });
