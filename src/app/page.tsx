@@ -1,14 +1,21 @@
+"use client";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import HomeImagesIist from "./components/home-images-list";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 export default async function Home() {
-  const session = useSession();
+  const { data: session, status, update } = useSession();
 
-  session.update();
+  useEffect(() => {
+    if (status === "loading" || !session) {
+      update();
+    }
+  }, [session, status, update]);
+
   return (
     <div className="py-8 px-2 bg-slate-100 h-fit text-center">
       <Heading
