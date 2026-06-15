@@ -6,6 +6,7 @@ import Link from "next/link";
 import HomeImagesIist from "./components/home-images-list";
 
 export default async function Home() {
+  location.reload();
   return (
     <div className="py-8 px-2 bg-slate-100 h-fit text-center">
       <Heading
