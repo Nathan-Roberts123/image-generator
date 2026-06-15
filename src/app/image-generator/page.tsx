@@ -5,11 +5,15 @@ import { createCaller } from "@/server/serverClient";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/authOptions";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 // quick fix for login not redirecting problem
 export const dynamic = "force-dynamic";
 
 async function Page() {
+  const cookieStore = cookies();
+  console.log(cookieStore.getAll());
+
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user?.id) {

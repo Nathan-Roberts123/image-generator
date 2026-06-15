@@ -18,8 +18,6 @@ function LoignPage() {
     if (res?.ok) {
       location.reload();
       window.location.href = "/";
-      window.location.href = "/image-generator";
-      window.location.href = "/";
       return;
     }
 
