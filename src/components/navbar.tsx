@@ -56,7 +56,7 @@ function Navbar() {
           <Button colorScheme="teal" onClick={onOpen}>
             Buy Points
           </Button>
-          {session?.user.id !== "authenticated" ? (
+          {status !== "authenticated" ? (
             <Button as={NextLink} colorScheme="teal" href="/auth/login">
               Signin
             </Button>
