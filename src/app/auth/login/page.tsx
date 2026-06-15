@@ -16,7 +16,8 @@ function LoignPage() {
     const res = await signIn("credentials", { redirect: false, ...data });
 
     if (res?.ok) {
-      window.location.href = "/";
+      router.push("/");
+      window.location.reload();
       return;
     }
 
