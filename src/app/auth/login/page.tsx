@@ -44,7 +44,7 @@ function LoignPage() {
           <Input type="password" {...register("password")} disabled={logIn} />
         </FormControl>
         <div className="flex justify-center mt-4">
-          <Button type="submit" colorScheme="blue" disabled={logIn}>
+          <Button type="submit" colorScheme="blue" isDisabled={logIn}>
             Login
           </Button>
         </div>
