@@ -4,14 +4,11 @@ import ImagesList from "./components/images-list";
 import { createCaller } from "@/server/serverClient";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/authOptions";
-import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 
 async function Page() {
   const session = await getServerSession(authOptions);
-
-  if (!session || !session.user?.id) {
-    redirect("/api/auth/signin");
-  }
 
   const caller = createCaller({ userId: session?.user.id! });
 

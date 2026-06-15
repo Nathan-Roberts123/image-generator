@@ -8,8 +8,6 @@ import { fonts } from "./fonts";
 import { MainLayout } from "@/components/main-layout";
 import prisma from "@/db";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Image Generator",
   description: "This web app uses AI to generate images",

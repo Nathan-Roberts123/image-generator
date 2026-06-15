@@ -1,3 +1,4 @@
+"use client";
 import { Heading } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
@@ -12,8 +13,7 @@ export default async function Home() {
         size="2xl"
         className="text-center gradient-text h-fit p-3"
       >
-        Nsindiso Transform Your Imagination Into Reality With AI Image
-        Generation
+        Transform Your Imagination Into Reality With AI Image Generation
       </Heading>
       <Text fontSize="2xl" className="text-center text-pink-600 h-fit mt-5">
         Harness the power of artificial intelligence to generate unique and

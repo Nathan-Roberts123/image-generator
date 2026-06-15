@@ -5,28 +5,18 @@ import { useForm } from "react-hook-form";
 import { TSigninForm } from "@/types";
 import { signIn } from "next-auth/react";
 import { useToast } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function LoignPage() {
   const { register, handleSubmit } = useForm<TSigninForm>();
-  const [user, setUser] = useState<any>(null);
   const toast = useToast();
-
-  const loadUser = async () => {
-    const res = await fetch("/api/user");
-    const data = await res.json();
-    setUser(data);
-  };
+  const router = useRouter();
 
   const onSubmit = async (data: TSigninForm) => {
     const res = await signIn("credentials", { redirect: false, ...data });
 
     if (res?.ok) {
-      location.reload();
-      await loadUser();
-      console.log("weeee have theuser: :", user);
-      window.location.href = "/auth/login";
-
+      router.push("/");
       return;
     }
 
