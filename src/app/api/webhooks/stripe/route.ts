@@ -38,6 +38,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   switch (event.type) {
     case "checkout.session.completed":
       const session_complete = event.data.object;
+      console.log({ "hook test": session_complete.payment_status });
       if (session_complete.payment_status === "paid") {
         if (!session_complete.metadata) {
           return new NextResponse(`Could Not Create Order Metadata Was Null`, {
