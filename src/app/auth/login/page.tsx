@@ -5,31 +5,31 @@ import { useForm } from "react-hook-form";
 import { TSigninForm } from "@/types";
 import { signIn } from "next-auth/react";
 import { useToast } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 function LoignPage() {
   const { register, handleSubmit } = useForm<TSigninForm>();
   const toast = useToast();
 
   const onSubmit = async (data: TSigninForm) => {
-    const res = await signIn("credentials", {
-      redirect: true,
-      redirectTo: "/",
-      ...data,
-    });
+    const res = await signIn("credentials", { redirect: false, ...data });
 
     if (res?.ok) {
-      toast({
-        title: "Error While Logging In.",
-        description: "Make sure you credentials are correct",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
-
-      // location.reload();
-      // window.location.replace("/");
-      // return;
+      location.reload();
+      window.location.href = "/";
+      window.location.href = "/image-generator";
+      window.location.href = "/";
+      return;
     }
+
+    toast({
+      title: "Error While Logging In.",
+      description: "Make sure you credentials are correct",
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   return (
