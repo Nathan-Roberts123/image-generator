@@ -12,7 +12,8 @@ export default async function Home() {
         size="2xl"
         className="text-center gradient-text h-fit p-3"
       >
-        Transform Your Imagination Into Reality With AI Image Generation
+        Nsindiso Transform Your Imagination Into Reality With AI Image
+        Generation
       </Heading>
       <Text fontSize="2xl" className="text-center text-pink-600 h-fit mt-5">
         Harness the power of artificial intelligence to generate unique and
