@@ -5,19 +5,19 @@ import { useForm } from "react-hook-form";
 import { TSigninForm } from "@/types";
 import { signIn } from "next-auth/react";
 import { useToast } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 function LoignPage() {
+  const [logIn, setLogin] = useState(false);
   const { register, handleSubmit } = useForm<TSigninForm>();
   const toast = useToast();
-  const router = useRouter();
 
   const onSubmit = async (data: TSigninForm) => {
     const res = await signIn("credentials", { redirect: false, ...data });
 
     if (res?.ok) {
-      //router.push("/");
       window.location.href = "/";
+      setLogin(false);
       return;
     }
 
@@ -35,15 +35,15 @@ function LoignPage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel>Email</FormLabel>
-          <Input type="email" {...register("email")} />
+          <Input type="email" {...register("email")} disabled={logIn} />
         </FormControl>
 
         <FormControl className="mt-4">
           <FormLabel>Password</FormLabel>
-          <Input type="password" {...register("password")} />
+          <Input type="password" {...register("password")} disabled={logIn} />
         </FormControl>
         <div className="flex justify-center mt-4">
-          <Button type="submit" colorScheme="blue">
+          <Button type="submit" colorScheme="blue" disabled={logIn}>
             Login
           </Button>
         </div>
