@@ -3,10 +3,12 @@ import { Button } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import HomeImagesIist from "./components/home-images-list";
-
-export const dynamic = "force-dynamic";
+import { useSession } from "next-auth/react";
 
 export default async function Home() {
+  const session = useSession();
+
+  session.update();
   return (
     <div className="py-8 px-2 bg-slate-100 h-fit text-center">
       <Heading
