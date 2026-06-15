@@ -9,7 +9,7 @@ export function getBaseUrl() {
     // reference for vercel.com
     return `https://${process.env.VERCEL_URL}`;
 
-  if (process.env.NODE_ENV == "production")
+  if (process.env.NODE_ENV === "production" && !process.env.VERCEL_URL)
     // reference for render.com
     return `http://image.nathank.store:80`;
 

@@ -5,17 +5,17 @@ const products: Prisma.ProductCreateInput[] = [
   {
     points: 10,
     price: 0.5,
-    stripe_price_id: "price_1PQNgjIdyR8QwdOfMUBBz9uR",
+    stripe_price_id: "price_1TibRVIdyR8QwdOfKKxlWHF4",
   },
   {
     points: 100,
     price: 5,
-    stripe_price_id: "price_1PQ45RIdyR8QwdOfwHQYtl4G",
+    stripe_price_id: "price_1TibSyIdyR8QwdOfSxKICqam",
   },
   {
     points: 200,
     price: 10,
-    stripe_price_id: "price_1PQ46BIdyR8QwdOfFV3bV5Ve",
+    stripe_price_id: "price_1TibTfIdyR8QwdOfUbQrnv1X",
   },
 ];
 
