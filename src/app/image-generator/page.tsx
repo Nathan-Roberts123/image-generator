@@ -4,12 +4,15 @@ import ImagesList from "./components/images-list";
 import { createCaller } from "@/server/serverClient";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/authOptions";
-
-// quick fix for login not redirecting problem
-// export const dynamic = "force-dynamic";
+import { redirect } from "next/navigation";
 
 async function Page() {
   const session = await getServerSession(authOptions);
+
+  if (!session || !session.user?.id) {
+    redirect("/api/auth/signin"); // Or redirect to "/"
+  }
+
   const caller = createCaller({ userId: session?.user.id! });
 
   const images = await caller.imageGenerator.getImages();
