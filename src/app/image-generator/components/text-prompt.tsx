@@ -71,7 +71,9 @@ const TextPrompt = () => {
       {!isPending && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isInvalid={!!errors.text}>
-            <FormLabel htmlFor="name">Enter Text Promt</FormLabel>
+            <FormLabel htmlFor="name">
+              Enter Text Promt(e.g a person coding on a computer)
+            </FormLabel>
             <Textarea
               id="name"
               placeholder="Enter prompt"
