@@ -17,6 +17,7 @@ function LoignPage() {
 
     if (res?.ok) {
       router.push("/");
+      router.refresh();
       return;
     }
 
