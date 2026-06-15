@@ -24,7 +24,7 @@ function LoignPage() {
     if (res?.ok) {
       location.reload();
       await loadUser();
-      console.log(user);
+      console.log("weeee have theuser: :", user);
       // window.location.href = "/";
 
       return;
