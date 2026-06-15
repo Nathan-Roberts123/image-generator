@@ -7,7 +7,6 @@ import Providers from "@/providers";
 import { fonts } from "./fonts";
 import { MainLayout } from "@/components/main-layout";
 import prisma from "@/db";
-import { unstable_noStore as noStore } from "next/cache";
 
 export const metadata: Metadata = {
   title: "Image Generator",
@@ -19,7 +18,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  noStore();
   const session = await getServerSession(authOptions);
   const products = await prisma.product.findMany();
 
