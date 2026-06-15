@@ -25,7 +25,7 @@ function LoignPage() {
       location.reload();
       await loadUser();
       console.log("weeee have theuser: :", user);
-      // window.location.href = "/";
+      window.location.href = "/auth/login";
 
       return;
     }
