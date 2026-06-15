@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 function LoignPage() {
   const { register, handleSubmit } = useForm<TSigninForm>();
