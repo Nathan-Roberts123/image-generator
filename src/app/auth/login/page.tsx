@@ -25,7 +25,7 @@ function LoignPage() {
       location.reload();
       await loadUser();
       console.log(user);
-      window.location.href = "/";
+      // window.location.href = "/";
 
       return;
     }
