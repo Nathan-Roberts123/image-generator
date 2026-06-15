@@ -13,17 +13,20 @@ function LoignPage() {
   const router = useRouter();
 
   const onSubmit = async (data: TSigninForm) => {
-    const res = await signIn("credentials", { callbackUrl: "/", ...data });
+    const res = await signIn("credentials", { redirect: false, ...data });
 
-    if (!res?.ok) {
-      toast({
-        title: "Error While Logging In.",
-        description: "Make sure you credentials are correct",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      });
+    if (res?.ok) {
+      window.location.replace("/");
+      return;
     }
+
+    toast({
+      title: "Error While Logging In.",
+      description: "Make sure you credentials are correct",
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+    });
   };
 
   return (
