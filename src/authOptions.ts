@@ -76,9 +76,24 @@ export const authOptions: NextAuthOptions = {
   },
   events: {
     async createUser({ user }) {
+      const productId = (
+        await prisma.product.findUnique({
+          where: {
+            stripe_price_id: "price_1TibRVIdyR8QwdOfKKxlWHF4",
+          },
+          select: { id: true },
+        })
+      )?.id;
+
+      if (!productId) {
+        throw new Error(
+          "Giving new user free points failed: productId was undefined",
+        );
+      }
+
       await createOrder({
         userId: user.id,
-        productId: "price_1TibRVIdyR8QwdOfKKxlWHF4",
+        productId,
       });
     },
   },
