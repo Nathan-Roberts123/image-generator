@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "@/db";
 import { env } from "@/env";
-import { createOrder, isSame } from "@/utils";
+import { assignUserFreePoints, createOrder, isSame } from "@/utils";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -76,25 +76,7 @@ export const authOptions: NextAuthOptions = {
   },
   events: {
     async createUser({ user }) {
-      const productId = (
-        await prisma.product.findUnique({
-          where: {
-            stripe_price_id: "price_1TibRVIdyR8QwdOfKKxlWHF4",
-          },
-          select: { id: true },
-        })
-      )?.id;
-
-      if (!productId) {
-        throw new Error(
-          "Giving new user free points failed: productId was undefined",
-        );
-      }
-
-      await createOrder({
-        userId: user.id,
-        productId,
-      });
+      await assignUserFreePoints(user);
     },
   },
 };

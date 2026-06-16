@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import prisma from "@/db";
+import { User } from "next-auth";
 
 export function getBaseUrl() {
   if (typeof window !== "undefined")
@@ -56,5 +57,27 @@ export const createOrder = async ({
       userId,
       productId,
     },
+  });
+};
+
+export const assignUserFreePoints = async (user: User) => {
+  const productId = (
+    await prisma.product.findUnique({
+      where: {
+        stripe_price_id: "price_1TibRVIdyR8QwdOfKKxlWHF4",
+      },
+      select: { id: true },
+    })
+  )?.id;
+
+  if (!productId) {
+    throw new Error(
+      "Giving new user free points failed: productId was undefined",
+    );
+  }
+
+  await createOrder({
+    userId: user.id,
+    productId,
   });
 };

@@ -1,7 +1,7 @@
 import { router, procedure } from "../trpc";
 import { ZUser } from "@/types";
 import prisma from "@/db";
-import { hashString } from "@/utils";
+import { assignUserFreePoints, hashString } from "@/utils";
 import { Prisma } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 import { getTotalPoints } from "@/utils/points";
@@ -20,6 +20,8 @@ export const userRouter = router({
           providerAccountId: uuidv4(),
         },
       });
+      await assignUserFreePoints(user);
+
       return { email: user.email };
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError) {
