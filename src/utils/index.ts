@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import prisma from "@/db";
 
 export function getBaseUrl() {
   if (typeof window !== "undefined")
@@ -42,3 +43,18 @@ export async function downloadImage(imageUrl: string, id: string) {
 
   setTimeout(() => URL.revokeObjectURL(link.href), 100);
 }
+
+export const createOrder = async ({
+  userId,
+  productId,
+}: {
+  userId: string;
+  productId: string;
+}) => {
+  await prisma.order.create({
+    data: {
+      userId,
+      productId,
+    },
+  });
+};

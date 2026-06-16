@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import prisma from "@/db";
 import { env } from "@/env";
-import { isSame } from "@/utils";
+import { createOrder, isSame } from "@/utils";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -73,5 +73,13 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/auth/login",
+  },
+  events: {
+    async createUser({ user }) {
+      await createOrder({
+        userId: user.id,
+        productId: "price_1TibRVIdyR8QwdOfKKxlWHF4",
+      });
+    },
   },
 };

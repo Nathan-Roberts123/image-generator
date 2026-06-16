@@ -1,25 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { env } from "@/env";
-import prisma from "@/db";
+import { createOrder } from "@/utils";
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY);
 const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
-
-const createOrder = async ({
-  userId,
-  productId,
-}: {
-  userId: string;
-  productId: string;
-}) => {
-  await prisma.order.create({
-    data: {
-      userId,
-      productId,
-    },
-  });
-};
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const body = await req.text();
