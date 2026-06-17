@@ -12,7 +12,7 @@ export async function generateImage(promt: TPrompt) {
     prompt: promt.text,
     n: 1,
     size: "1024x1024",
-    quality: "standard",
+    quality: "low",
   });
 
   const image_base64 = response.data[0].b64_json;
