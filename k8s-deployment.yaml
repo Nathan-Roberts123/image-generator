@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: image-generator-deployment
+spec:
+  selector:
+    matchLabels:
+      app: image-generator
+  replicas: 2 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: image-generator
+    spec:
+      containers:
+        - name: image-generator
+          image: nsindiso/image-generator:v2 # Image that will be used to containers in the cluster
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000 # The port that the container is running on in the cluster
+
+
+---
+
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: image-generator-ssvc
+spec:
+  selector:
+    app: image-generator
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 3000 
+  type: LoadBalancer # type of the service.
